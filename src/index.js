@@ -9,10 +9,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configStore from './features/store/configStore';
 import ScrollToTop from './app/layout/ScrollToTop';
-import { loadEvents } from './features/store/actions/eventActions';
 
 const store = configStore();
-store.dispatch(loadEvents());
 
 const rootEl = document.getElementById('root');
 
