@@ -14,6 +14,7 @@ const SignedOut = ({ setAuthenticated }) => {
         content="Login"
       />
       <Button
+        onClick={() => dispatch(openModal({ modalType: 'RegisterForm' }))}
         basic
         inverted
         content="Register"
