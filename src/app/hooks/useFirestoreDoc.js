@@ -7,7 +7,7 @@ import {
 } from '../../features/store/reducers/asyncReducer';
 import { dataFromSnapshot } from '../firestore/firestoreService';
 
-const useFirestoreDoc = ({ query, data, deps, shouldExecute }) => {
+const useFirestoreDoc = ({ query, data, deps, shouldExecute = true }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
