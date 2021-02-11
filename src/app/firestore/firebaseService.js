@@ -44,3 +44,16 @@ export const updateUserPassword = (creds) => {
   const user = firebase.auth().currentUser; //This is synchronous as this information is stored in our local storage
   return user.updatePassword(creds.newPassword1); //returns a promise
 };
+
+export const uploadToFirebaseStorage = (file, filename) => {
+  const user = firebase.auth().currentUser;
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`${user.uid}/user_images/${filename}`).put(file);
+};
+
+export const deleteFromFirebaseStorage = (filename) => {
+  const userUid = firebase.auth().currentUser.uid;
+  const storageRef = firebase.storage().ref();
+  const photoRef = storageRef.child(`${userUid}/user_images/${filename}`);
+  return photoRef.delete();
+};
