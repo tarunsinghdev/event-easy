@@ -20,9 +20,17 @@ export const dataFromSnapshot = (snapshot) => {
   };
 };
 
-export const listenToEventsFromFirestore = (predicate) => {
+export const fetchEventsFromFirestore = (
+  predicate,
+  limit,
+  lastDocSnapshot = null
+) => {
   const user = firebase.auth().currentUser;
-  let eventsRef = db.collection('events').orderBy('date');
+  let eventsRef = db
+    .collection('events')
+    .orderBy('date')
+    .startAfter(lastDocSnapshot)
+    .limit(limit);
   switch (predicate.get('filter')) {
     case 'isGoing':
       return eventsRef
@@ -127,19 +135,63 @@ export const getUserPhotos = (userUid) => {
   return db.collection('users').doc(userUid).collection('photos');
 };
 
-export const setMainPhoto = async (photo) => {
+export async function setMainPhoto(photo) {
   const user = firebase.auth().currentUser;
+  const today = new Date();
+  const eventDocQuery = db
+    .collection('events')
+    .where('attendeeIds', 'array-contains', user.uid)
+    .where('date', '>=', today);
+  const userFollowingRef = db
+    .collection('following')
+    .doc(user.uid)
+    .collection('userFollowing');
+
+  const batch = db.batch();
+
+  batch.update(db.collection('users').doc(user.uid), {
+    photoURL: photo.url,
+  });
+
   try {
-    await db.collection('users').doc(user.uid).update({
-      photoURL: photo.url,
+    const eventsQuerySnap = await eventDocQuery.get();
+    for (let i = 0; i < eventsQuerySnap.docs.length; i++) {
+      let eventDoc = eventsQuerySnap.docs[i];
+      if (eventDoc.data().hostUid === user.uid) {
+        batch.update(eventsQuerySnap.docs[i].ref, {
+          hostPhotoURL: photo.url,
+        });
+      }
+      batch.update(eventsQuerySnap.docs[i].ref, {
+        attendees: eventDoc.data().attendees.filter((attendee) => {
+          if (attendee.id === user.uid) {
+            attendee.photoURL = photo.url;
+          }
+          return attendee;
+        }),
+      });
+    }
+    const userFollowingSnap = await userFollowingRef.get();
+    userFollowingSnap.docs.forEach((docRef) => {
+      let followingDocRef = db
+        .collection('following')
+        .doc(docRef.id)
+        .collection('userFollowers')
+        .doc(user.uid);
+      batch.update(followingDocRef, {
+        photoURL: photo.url,
+      });
     });
+
+    await batch.commit();
+
     return await user.updateProfile({
       photoURL: photo.url,
     });
   } catch (error) {
     throw error;
   }
-};
+}
 
 export const deletePhotoFromCollection = (photoId) => {
   const userUid = firebase.auth().currentUser.uid;
@@ -205,39 +257,39 @@ export const getUserEventsQuery = (activeTab, userUid) => {
 
 export const followUser = async (profile) => {
   const user = firebase.auth().currentUser;
+  const batch = db.batch();
   try {
-    await db
-      .collection('following')
-      .doc(user.uid)
-      .collection('userFollowing')
-      .doc(profile.id)
-      .set({
+    batch.set(
+      db
+        .collection('following')
+        .doc(user.uid)
+        .collection('userFollowing')
+        .doc(profile.id),
+      {
         displayName: profile.displayName,
         photoURL: profile.photoURL,
         uid: profile.id,
-      });
-    await db
-      .collection('following')
-      .doc(profile.id)
-      .collection('userFollowers')
-      .doc(user.uid)
-      .set({
+      }
+    );
+    batch.set(
+      db
+        .collection('following')
+        .doc(profile.id)
+        .collection('userFollowers')
+        .doc(user.uid),
+      {
         displayName: user.displayName,
         photoURL: user.photoURL,
         uid: user.uid,
-      });
-    await db
-      .collection('users')
-      .doc(user.uid)
-      .update({
-        followingCount: firebase.firestore.FieldValue.increment(1),
-      });
-    return await db
-      .collection('users')
-      .doc(profile.id)
-      .update({
-        followerCount: firebase.firestore.FieldValue.increment(1),
-      });
+      }
+    );
+    batch.update(db.collection('users').doc(user.uid), {
+      followingCount: firebase.firestore.FieldValue.increment(1),
+    });
+    batch.update(db.collection('users').doc(profile.id), {
+      followerCount: firebase.firestore.FieldValue.increment(1),
+    });
+    return await batch.commit();
   } catch (error) {
     throw error;
   }
@@ -245,31 +297,29 @@ export const followUser = async (profile) => {
 
 export const unfollowUser = async (profile) => {
   const user = firebase.auth().currentUser;
+  const batch = db.batch();
   try {
-    await db
-      .collection('following')
-      .doc(user.uid)
-      .collection('userFollowing')
-      .doc(profile.id)
-      .delete();
-    await db
-      .collection('following')
-      .doc(profile.id)
-      .collection('userFollowers')
-      .doc(user.uid)
-      .delete();
-    await db
-      .collection('users')
-      .doc(user.uid)
-      .update({
-        followingCount: firebase.firestore.FieldValue.increment(-1),
-      });
-    return await db
-      .collection('users')
-      .doc(profile.id)
-      .update({
-        followerCount: firebase.firestore.FieldValue.increment(-1),
-      });
+    batch.delete(
+      db
+        .collection('following')
+        .doc(user.uid)
+        .collection('userFollowing')
+        .doc(profile.id)
+    );
+    batch.delete(
+      db
+        .collection('following')
+        .doc(profile.id)
+        .collection('userFollowers')
+        .doc(user.uid)
+    );
+    batch.update(db.collection('users').doc(user.uid), {
+      followingCount: firebase.firestore.FieldValue.increment(-1),
+    });
+    batch.update(db.collection('users').doc(profile.id), {
+      followerCount: firebase.firestore.FieldValue.increment(-1),
+    });
+    return await batch.commit();
   } catch (error) {
     throw error;
   }
