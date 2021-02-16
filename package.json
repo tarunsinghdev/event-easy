@@ -19,7 +19,6 @@
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.3.1",
     "react-infinite-scroller": "^1.2.4",
-    "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
@@ -35,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": [
