@@ -1,6 +1,7 @@
 import {
   CLEAR_COMMENTS,
   CLEAR_EVENTS,
+  CLEAR_SELECTED_EVENT,
   CREATE_EVENT,
   DELETE_EVENT,
   FETCH_EVENTS,
@@ -64,6 +65,11 @@ const eventReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         selectedEvent: payload,
+      };
+    case CLEAR_SELECTED_EVENT:
+      return {
+        ...state,
+        selectedEvent: null,
       };
     case CLEAR_EVENTS:
       return {
