@@ -19,4 +19,5 @@ jobs:
           channelId: live
           projectId: events-easy
         env:
+          REACT_APP_API_KEY: '${{secrets.process.env.REACT_APP_API_KEY}}'
           FIREBASE_CLI_PREVIEWS: hostingchannels
