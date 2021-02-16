@@ -6,6 +6,9 @@ export const LISTEN_TO_EVENT_CHAT = 'LISTEN_TO_EVENT_CHAT';
 export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 export const LISTEN_TO_SELECTED_EVENT = 'LISTEN_TO_SELECTED_EVENT';
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
+export const SET_FILTER = 'SET_FILTER';
+export const SET_START_DATE = 'SET_START_DATE';
+export const RETAIN_STATE = 'RETAIN_STATE';
 
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';

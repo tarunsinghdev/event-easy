@@ -25,7 +25,7 @@ const UnauthModal = ({ history, setModalOpen }) => {
   const handleOpenLoginModal = (modalType) => {
     dispatch(openModal({ modalType }));
     setOpen(false);
-    setModalOpen(false);
+    if (setModalOpen) setModalOpen(false);
   };
 
   return (
