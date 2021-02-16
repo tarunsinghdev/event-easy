@@ -5,7 +5,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD_0ds8RSfuE1Pv65j2mzCoj5sFJVpx3JE',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'events-easy.firebaseapp.com',
   projectId: 'events-easy',
   storageBucket: 'events-easy.appspot.com',
