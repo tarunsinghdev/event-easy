@@ -15,7 +15,6 @@ import {
   asyncActionFinish,
   asyncActionError,
 } from '../reducers/asyncReducer';
-// import { fetchSampleData } from '../../../app/api/mockApi';
 import {
   dataFromSnapshot,
   fetchEventsFromFirestore,
