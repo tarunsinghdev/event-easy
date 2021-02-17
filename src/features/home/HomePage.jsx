@@ -18,7 +18,7 @@ const HomePage = ({ history }) => {
             src="/assets/logo.png"
             style={{ marginBottom: 12 }}
           />
-          Event--Easy
+          Event---Easy
         </Header>
         <Button onClick={() => history.push('/events')} size="huge" inverted>
           Get Started
