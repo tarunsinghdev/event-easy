@@ -18,7 +18,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EVENTS_EASY }}'
           channelId: live
           projectId: events-easy
-          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project events-easy --json
         env:
-          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
           FIREBASE_CLI_PREVIEWS: hostingchannels
