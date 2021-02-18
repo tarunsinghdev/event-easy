@@ -1,7 +1,6 @@
 # Event Easy 🚀
 
-<img src="https://sloc.xyz/github/tarunsinghdev/event-easy" alt="LOC"/> <a href="https://github.com/tarunsinghdev/event-easy/stargazers"><img src="https://img.shields.io/github/stars/tarunsinghdev/event-easy" alt="Stars Badge"/></a>
-<a href="https://github.com/tarunsinghdev/event-easy/network/members"><img src="https://img.shields.io/github/forks/tarunsinghdev/event-easy" alt="Forks Badge"/></a>
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://events-easy.firebaseapp.com/)
 [![Build passing](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=flat-square)](https://events-easy.firebaseapp.com/)&nbsp;![Made with Love in India](https://madewithlove.org.in/badge.svg)
 
 **Simplifying the events.**
