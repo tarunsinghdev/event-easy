@@ -35,16 +35,21 @@ const EventDetailedPage = ({ match }) => {
 
   return (
     <Grid>
-      <Grid.Column width={10}>
+      <Grid.Column width={10} only="tablet computer">
         <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
         <EventDetailedInfo event={event} />
         <EventDetailedChat eventId={event.id} />
       </Grid.Column>
-      <Grid.Column width={6}>
+      <Grid.Column width={6} only="tablet computer">
         <EventDetailedSidebar
           attendees={event?.attendees}
           hostUid={event.hostUid}
         />
+      </Grid.Column>
+      <Grid.Column width={16} only="mobile">
+        <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
+        <EventDetailedInfo event={event} />
+        <EventDetailedChat eventId={event.id} />
       </Grid.Column>
     </Grid>
   );

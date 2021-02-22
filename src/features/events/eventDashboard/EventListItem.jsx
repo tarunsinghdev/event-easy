@@ -9,13 +9,13 @@ const EventListItem = ({ event }) => {
     <Segment.Group>
       <Segment>
         <Item.Group>
-          <Item>
+          <Item style={{ flexDirection: 'row' }}>
             <Item.Image
               size="tiny"
               circular
               src={event.hostPhotoURL || '/assets/user.png'}
             />
-            <Item.Content>
+            <Item.Content style={{ marginLeft: '5px' }}>
               <Item.Header content={event.title} />
               <Item.Description>
                 Hosted by{' '}

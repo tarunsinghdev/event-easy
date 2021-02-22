@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Grid, Menu } from 'semantic-ui-react';
 import SignedIn from './SignedIn';
 import SignedOut from './SignedOut';
 
@@ -16,9 +16,13 @@ const NavBar = () => {
         </Menu.Item>
         <Menu.Item as={NavLink} to="/events" name="Events" />
         {authenticated && (
-          <Menu.Item as={NavLink} to="/createEvent">
-            <Button positive inverted content="Create Event" />
-          </Menu.Item>
+          <Grid>
+            <Grid.Column only="tablet computer">
+              <Menu.Item width={4} as={NavLink} to="/createEvent">
+                <Button positive inverted content="Create Event" />
+              </Menu.Item>
+            </Grid.Column>
+          </Grid>
         )}
 
         {authenticated ? <SignedIn /> : <SignedOut />}

@@ -34,3 +34,14 @@ body {
   border: none;
   box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
 }
+
+.ui.items:not(.unstackable) > .item > .image,
+.ui.items:not(.unstackable) > .item > .image > img {
+  width: 80px !important;
+}
+.ui.menu.fluid,
+.ui.vertical.menu.fluid {
+  width: 100% !important;
+  display: flex;
+  flex-wrap: wrap;
+}

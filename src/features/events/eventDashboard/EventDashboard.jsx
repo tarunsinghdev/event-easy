@@ -40,7 +40,7 @@ const EventDashboard = () => {
 
   return (
     <Grid>
-      <Grid.Column width={10}>
+      <Grid.Column only="computer tablet" width={10}>
         {loadingInitial && (
           <>
             <EventListItemPlaceholder />
@@ -54,7 +54,21 @@ const EventDashboard = () => {
           moreEvents={moreEvents}
         />
       </Grid.Column>
-      <Grid.Column width={6}>
+      <Grid.Column only="mobile" width={16}>
+        {loadingInitial && (
+          <>
+            <EventListItemPlaceholder />
+            <EventListItemPlaceholder />
+          </>
+        )}
+        <EventList
+          events={events}
+          getNextEvents={handleFetchNextEvents}
+          loading={loading}
+          moreEvents={moreEvents}
+        />
+      </Grid.Column>
+      <Grid.Column only="computer tablet" width={6}>
         <EventFilters loading={loading} />
       </Grid.Column>
       <Grid.Column width={10}>

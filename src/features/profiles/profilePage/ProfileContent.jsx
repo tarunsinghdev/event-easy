@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tab } from 'semantic-ui-react';
+import { Grid, Tab } from 'semantic-ui-react';
 import AboutTab from './AboutTab';
 import EventsTab from './EventsTab';
 import PhotosTab from './PhotosTab';
@@ -45,12 +45,24 @@ const ProfileContent = ({ profile, isCurrentUser }) => {
     },
   ];
   return (
-    <Tab
-      menu={{ fluid: true, vertical: true }}
-      menuPosition="right"
-      panes={panes}
-      onTabChange={(e, data) => setActiveTab(data.activeIndex)}
-    />
+    <Grid stackable>
+      <Grid.Column only="tablet computer" width={16}>
+        <Tab
+          menu={{ fluid: true, vertical: true }}
+          menuPosition="right"
+          panes={panes}
+          onTabChange={(e, data) => setActiveTab(data.activeIndex)}
+        />
+      </Grid.Column>
+      <Grid.Column only="mobile" width={16}>
+        <Tab
+          menu={{ fluid: true, vertical: false }}
+          menuPosition="right"
+          panes={panes}
+          onTabChange={(e, data) => setActiveTab(data.activeIndex)}
+        />
+      </Grid.Column>
+    </Grid>
   );
 };
 

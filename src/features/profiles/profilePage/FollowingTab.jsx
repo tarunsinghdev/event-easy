@@ -38,8 +38,20 @@ const FollowingTab = ({ profile, activeTab }) => {
             content={activeTab === 3 ? 'Followers' : 'Followings'}
           />
         </Grid.Column>
-        <Grid.Column width={16}>
+        <Grid.Column only="tablet computer" width={16}>
           <Card.Group itemsPerRow={5}>
+            {activeTab === 3 &&
+              followers.map((profile) => (
+                <ProfileCard profile={profile} key={profile.id} />
+              ))}
+            {activeTab === 4 &&
+              followings.map((profile) => (
+                <ProfileCard profile={profile} key={profile.id} />
+              ))}
+          </Card.Group>
+        </Grid.Column>
+        <Grid.Column only="mobile" width={16}>
+          <Card.Group itemsPerRow={3}>
             {activeTab === 3 &&
               followers.map((profile) => (
                 <ProfileCard profile={profile} key={profile.id} />
