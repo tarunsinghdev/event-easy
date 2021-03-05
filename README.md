@@ -1,5 +1,6 @@
 # Event Easy 🚀
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/tarunsinghdev/event-easy/pulls)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://events-easy.firebaseapp.com/)
 [![Build passing](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=flat-square)](https://events-easy.firebaseapp.com/)&nbsp;![Made with Love in India](https://madewithlove.org.in/badge.svg)
 
@@ -7,16 +8,21 @@
 
 ## Host 👨‍💻 | Join ➕️ | Connect 👥
 
-## Features ⭐️
+## ▶️ Update
+
+We are happy to announce that the **documentation website** of this project is now live. You can go and check it [here](https://github.com/tarunsinghdev/docs-event-easy)
+
+## ⭐️ Features
 
 - Authentication : Email/Password, Google, Facebook.
 - Host & Join Events.
 - Filter Events by Date, All Events, I'm going, I'm hosting.
 - Chat about the event( Comment & Reply ).
+- Upload and change your profile photo.
 - Follow/Unfollow user.
-- Check all the events a user is interested from the profile page.
+- Check all the events a user is interested in, from the profile page.
 
-## Tech Stack 💻
+## 💻 Tech Stack
 
 - [React.js](https://reactjs.org/)
 - [Redux.js](https://redux.js.org/)

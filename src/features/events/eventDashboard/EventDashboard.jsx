@@ -71,7 +71,10 @@ const EventDashboard = () => {
       <Grid.Column only="computer tablet" width={6}>
         <EventFilters loading={loading} />
       </Grid.Column>
-      <Grid.Column width={10}>
+      <Grid.Column only="computer tablet" width={10}>
+        <Loader active={loading} />
+      </Grid.Column>
+      <Grid.Column only="mobile" width={16}>
         <Loader active={loading} />
       </Grid.Column>
     </Grid>
