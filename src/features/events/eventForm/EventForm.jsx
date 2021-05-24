@@ -69,7 +69,7 @@ const EventForm = ({ match, history, location }) => {
 
   useFirestoreDoc({
     shouldExecute:
-      match.params.id !== selectedEvent?.id &&
+      match.params.id === selectedEvent?.id &&
       location.pathname !== '/createEvent',
     query: () => listenToEventFromFirestore(match.params.id),
     data: (event) => dispatch(listenToSelectedEvent(event)),
