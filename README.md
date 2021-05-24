@@ -8,6 +8,10 @@
 
 ## Host 👨‍💻 | Join ➕️ | Connect 👥
 
+> ### Test user
+>
+> **Email** : david@test.com <br/> **Password** : 12345678
+
 ## ▶️ Update
 
 We are happy to announce that the **documentation website** of this project is now live. You can go and check it [here](https://github.com/tarunsinghdev/docs-event-easy)
